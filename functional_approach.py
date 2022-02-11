@@ -17,7 +17,7 @@ def is_valid_sequence(sequence):
 
 
 def are_all_frames_valid(sequence):
-    for idx in range(0, len(sequence), 2):
+    for idx in range(0, len(sequence), 2):  # using loop that always jumps two indices per iteration
         if sum(sequence[idx:idx + 2]) not in range(0, 11):
             return False
     return True
@@ -27,15 +27,15 @@ def calculate_score(sequence):
     framescores = []
     if is_valid_sequence(sequence):
         for counter in range(0, 20, 2):
-            if sequence[counter] == 10:
-                if sequence[counter + 2] == 10:
-                    if counter == 18:
+            if sequence[counter] == 10:  # case: trike
+                if sequence[counter + 2] == 10:  # case: two strikes in a row
+                    if counter == 18:  # subcase for the two additional for when the last regular frame is a strike
                         framescores.append(10 + sequence[-2] + sequence[-1])
                     else:
                         framescores.append(20 + sequence[counter + 4])
                 else:
                     framescores.append(10 + sum(sequence[counter + 2:counter + 4]))
-            elif sum(sequence[counter:counter + 2]) == 10:
+            elif sum(sequence[counter:counter + 2]) == 10:  # case: spare
                 framescores.append(10 + sequence[counter + 2])
             else:
                 framescores.append(sum(sequence[counter:counter + 2]))
