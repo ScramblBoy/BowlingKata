@@ -29,7 +29,10 @@ def calculate_score(sequence):
         for counter in range(0, 20, 2):
             if sequence[counter] == 10:
                 if sequence[counter + 2] == 10:
-                    framescores.append(20 + sequence[counter + 4])
+                    if counter == 18:
+                        framescores.append(10 + sequence[-2] + sequence[-1])
+                    else:
+                        framescores.append(20 + sequence[counter + 4])
                 else:
                     framescores.append(10 + sum(sequence[counter + 2:counter + 4]))
             elif sum(sequence[counter:counter + 2]) == 10:
